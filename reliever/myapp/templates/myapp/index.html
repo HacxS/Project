@@ -1,0 +1,9 @@
+{% extends 'myapp/base_visitor.html' %}
+
+{% block content %}
+
+<h1>List of Doctors</h1>
+        {% for doc in docs %}
+               <a href="http://127.0.0.1:8000/chat/{{ doc }}"><h1>{{ doc }}<br></h1></a> 
+        {% endfor %}
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "music/index.html" %}
+{% block title %}{{ album.album_title }}{% endblock title %}
+{% block content %}
+
+    <h3>{{ album.album_title }}</h3>
+    <hr>
+    <p>artist = {{ album.album_artist }}</p>
+    <p>genre = {{ album.genre }}</p>
+    <img src="{{ album.album_logo.url }}" alt="album_logo" width="500px">
+    <br>
+    <!-- <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">Twitter</a>
+    <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google+</a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ share_string }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">Linkedin</a>
+    <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}">Reddit</a> -->
+    <hr>                                                                
+    <h4>Songs</h4>
+    <a type="button" class="btn btn-success btn-lg" href="{% url 'music:add_song' album.id %}"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Songs</a>
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Song Title</th>
+                <th>Album</th>
+                <th>Play</th>
+                <th>Favourite</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in album.song_set.all %}
+                <tr>
+                    <td>{{ song.song_title }}</td>
+                    <td><a href="{% url 'music:details' album_id=album.id %}">{{ song.album.album_title }}<img class="img-responsive img-rounded" src="{{ song.album.album_logo.url }}" alt="album_logo" width="40px"></a></td>
+                    <td><a class="btn btn-success" href="{{ song.audio_file.url }}" target="_blank"><span class="glyphicon glyphicon-play"></span>&nbsp;Play</a></td>
+                    <td>
+                        <a href="{% url 'music:favourite_song' album_id=album.id song_id=song.id %}" role="button" class="btn btn-default">
+                            {% if song.is_favourite %}
+                                <img src="https://image.flaticon.com/icons/svg/291/291205.svg" alt="star" class="img-responsive" width="18px">
+                            {% else %}
+                                <span class="glyphicon glyphicon-star-empty"></span>                                                
+                            {% endif %}
+                        </a>
+                        <!--{% comment %} {% if song.is_favourite %}
+                        <img src="https://image.flaticon.com/icons/svg/291/291205.svg" alt="star" style="width:16px;height:16px;">
+                        {% else %}
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <form action="{% url 'music:favourite' album.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="checked" value="{{ song.id }}">
+                            <button type="submit" class="btn btn-primary">fav</button>
+                        </form>
+                        {% endif %} {% endcomment %}-->
+                    </td>
+                    <td><a href="{% url 'music:update_song' album_id=album.id song_id=song.id %}" class="btn btn-default">Update</a></td>
+                    <td><a class="btn btn-danger" href="{% url 'music:delete_song' album_id=album.id song_id=song.id %}"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

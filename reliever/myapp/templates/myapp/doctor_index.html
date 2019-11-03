@@ -1,0 +1,7 @@
+{% extends 'myapp/base_visitor.html' %}
+{% block content %}
+<h1>Client Wants to Contacts You</h1>
+        {% for cli in clients %}
+               <a href="http://127.0.0.1:8000/chat/{{ cli }}"><h1>{{ cli }}<br></h1></a> 
+        {% endfor %}
+{% endblock %}

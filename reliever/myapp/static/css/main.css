@@ -1,0 +1,36 @@
+body{
+    background-image: url('../images/background.png');
+}
+
+.navbar-brand{
+    font-family: 'Satisfy', sans-serif, serif;
+}
+
+.navbar{
+    border-radius: 0;
+}
+
+ul.errorlist li{
+    list-style-image: url('../images/favicon.ico');
+}
+
+ul.errorlist{
+    padding-left: 0;
+}
+.block {
+    display: block;
+    width: 40%;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin:20px 28px;
+  }
+  
+  .block:hover {
+    background-color: #ddd;
+    color: black;
+  }

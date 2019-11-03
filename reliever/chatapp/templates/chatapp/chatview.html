@@ -1,0 +1,52 @@
+{% extends 'myapp/base_visitor.html' %}
+{% block content %}
+
+<div class="container">
+         
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><h1>{{ other_user }}</h1></th>
+
+        <th><h1 style="text-align: right;">{{ curr_user }}</h1></th>
+      </tr>
+    </thead>
+
+
+    <tbody>
+    	{% for time,mess,choice in total_mess %}
+	
+      <tr>
+      	{% if choice %}
+      	<td></td>
+        <td><p style="text-align: right;color: blue;"><b> {{ mess }} ~ </b><span class="small">{{ time }}</span></p></td>
+        
+
+        {% else %}
+
+        <td>
+
+	<p style="text-align: left;color: green;"><span class="small">{{ time }} </span><b>~ {{ mess }} </b></p></td>
+        <td></td>
+      </tr>
+   {% endif %}
+	{% endfor %}
+    </tbody>
+  </table>
+</div>
+
+	<div class="container">
+
+	
+	
+	
+<form action="" method="post">{% csrf_token %}
+
+	
+	<input class="form-control" type="text" name="message" label="Input Message">
+	<button class="btn btn-primary">Send</button>
+
+
+</form>
+</div>
+{% endblock %}

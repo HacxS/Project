@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Reliever{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'images/favicon.ico' %}"/> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        .block {
+        display: block;
+        width: 90%;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 28px;
+        font-size: 1 6px;
+        cursor: pointer;
+        text-align: center;
+        margin:20px 28px;
+        }
+
+        .store {
+            font-family: '';
+            padding-left: 100px;
+
+        }
+
+        .block:hover {
+        background-color: #ddd;
+        color: black;
+        }
+
+        /* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+    text-align: center;
+    background-color: #ccc;
+    border: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'myapp:index' %}">Relief</a>
+                <a class="navbar-brand store" href="{% url 'shop:product_list' %}"><span class="glyphicon glyphicon-apple"></span> &nbsp;MedShop</a>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>   
+
+            <div class="collapse navbar-collapse" id="topNavBar">
+                <ul class="nav navbar-nav navbar-right">
+                    {% comment %} <li class="{% block register_active %}{% endblock register_active %}"><a href="{% url 'music:register' %}"><span class="glyphicon glyphicon-registration-mark"></span>&nbsp; Register</a></li>{% endcomment %}
+                    <li class="{% block login_active %}{% endblock login_active %}"><a class="store navbar-brand" style="float: right;" href="{% if username %}{% url 'myapp:user_logout' %}{% else %}{% url 'myapp:user_login' %}{% endif %}"><span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                        {% if username %}
+                        {{ username }}
+                        {% else %}
+                        LOGIN
+                        {% endif %}
+                    </a></li> 
+                </ul>
+            </div>
+        </div>        
+    </nav>
+{% block content %}
+<div style="margin-top: 200px;" class="container">
+    <div class="row row-centered">
+        <div class="col-xs-12 col-centered">
+        <a class="block" href="{% url 'myapp:doctor_login' %}">Doctor</a>
+        <a class="block" href="{% url 'myapp:user_login' %}">User</a>
+
+    </div>
+    </div>
+   
+    
+     
+
+</div>
+    
+    
+    {% endblock content %}
+</body>
+</html>

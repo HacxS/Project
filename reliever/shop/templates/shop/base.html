@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Reliever{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'images/favicon.ico' %}"/> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        .block {
+        display: block;
+        width: 40%;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 28px;
+        font-size: 1 6px;
+        cursor: pointer;
+        text-align: center;
+        margin:20px 28px;
+        }
+
+        .store {
+            font-family: '';
+            padding-left: 100px;
+
+        }
+
+        .active {
+
+            color: white;
+        }
+
+        .block:hover {
+        background-color: #ddd;
+        color: black;
+        }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'myapp:index' %}">Relief</a>
+                <a class="navbar-brand store" href="{% url 'shop:product_list' %}"><span class="glyphicon glyphicon-apple active"></span> &nbsp;<span class="active">MedShop</span></a>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>   
+
+            <div class="collapse navbar-collapse" id="topNavBar">
+                <ul class="nav navbar-nav navbar-right">
+                    {% comment %} <li class="{% block register_active %}{% endblock register_active %}"><a href="{% url 'music:register' %}"><span class="glyphicon glyphicon-registration-mark"></span>&nbsp; Register</a></li>{% endcomment %}
+                    <li class="{% block login_active %}{% endblock login_active %}"><a class="store navbar-brand" style="float: right;" href="{% if username %}{% url 'myapp:user_logout' %}{% else %}{% url 'myapp:user_login' %}{% endif %}"><span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                        {% if username %}
+                        {{ username }}
+                        {% else %}
+                        LOGIN
+                        {% endif %}
+                    </a></li> 
+                </ul>
+            </div>
+        </div>        
+    </nav>
+
+
+
+<div class="container">
+    <div class="row" style="margin-top: 6%">
+         <button class="btn btn-info pull-right">
+            {% with totail_items=cart|length %}
+                {% if cart|length > 0 %}
+                    My Shopping Order:
+                    <a href="{% url "cart:cart_detail" %}" style="color: #ffffff">
+                        {{ totail_items }} item {{ totail_items|pluralize }}, ₹ {{ cart.get_total_price }}
+                    </a>
+                    {% else %}
+                    Your cart is empty.
+                {% endif %}
+            {% endwith %}
+         </button>
+    </div>
+</div>
+{% block content %}
+<a href="{% url 'myapp:doctor_login' %}"><button type="button" class="block">Doctor</button></a>
+<a href="{% url 'myapp:user_login' %}"><button type="button" class="block">user</button></a>
+    
+    
+    {% endblock content %}
+</body>
+</html>
+
+</html>
